@@ -87,17 +87,30 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  uint8_t count = 0;
+  uint8_t flag = 1;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, SET);
-	  HAL_Delay(2000);
-	  HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, RESET);
-	  HAL_Delay(4000);
+	  if(flag){
+		  HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, SET);
+		  count++;
+	  }else{
+		  HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, RESET);
+		  count++;
+	  }
+
+	  if(count == 2){
+		  flag = 0;
+	  }else if(count == 6){
+		  count = 0;
+		  flag = 1;
+	  }
+
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
