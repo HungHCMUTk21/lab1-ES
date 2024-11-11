@@ -89,23 +89,41 @@ int main(void)
   /* USER CODE BEGIN 2 */
   uint8_t count = 0;
   uint8_t flag = 1;
+  //RED = 1 - GREEN = 2 - BLUE = 3
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(flag){
-		  HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, SET);
-		  count++;
-	  }else{
-		  HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, RESET);
-		  count++;
+	  switch (flag) {
+		case 1:
+			HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, SET);
+			HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, RESET);
+			HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, RESET);
+			count++;
+			break;
+		case 2:
+			HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, RESET);
+			HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, SET);
+			HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, RESET);
+			count++;
+			break;
+		case 3:
+			HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, RESET);
+			HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, RESET);
+			HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, SET);
+			count++;
+			break;
+		default:
+			break;
 	  }
 
-	  if(count == 2){
-		  flag = 0;
-	  }else if(count == 6){
+	  if(count == 5){
+		  flag = 2;
+	  }else if(count == 8){
+		  flag = 3;
+	  }else if(count == 9){
 		  count = 0;
 		  flag = 1;
 	  }
@@ -181,14 +199,14 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, LED_G_Pin|LED_R_Pin|LED_B_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LED3_Pin */
-  GPIO_InitStruct.Pin = LED3_Pin;
+  /*Configure GPIO pins : LED_G_Pin LED_R_Pin LED_B_Pin */
+  GPIO_InitStruct.Pin = LED_G_Pin|LED_R_Pin|LED_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED3_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
