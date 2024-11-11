@@ -482,9 +482,9 @@ int main(void)
  8000560:	2303      	movs	r3, #3
  8000562:	71bb      	strb	r3, [r7, #6]
  8000564:	e006      	b.n	8000574 <main+0xbc>
-	  }else if(count == 10){
+	  }else if(count == 9){
  8000566:	79fb      	ldrb	r3, [r7, #7]
- 8000568:	2b0a      	cmp	r3, #10
+ 8000568:	2b09      	cmp	r3, #9
  800056a:	d103      	bne.n	8000574 <main+0xbc>
 		  count = 0;
  800056c:	2300      	movs	r3, #0

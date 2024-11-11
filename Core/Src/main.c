@@ -122,7 +122,7 @@ int main(void)
 		  flag = 2;
 	  }else if(count == 8){
 		  flag = 3;
-	  }else if(count == 10){
+	  }else if(count == 9){
 		  count = 0;
 		  flag = 1;
 	  }
